@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>妊娠中の食べ物OK/NGチェッカー｜妊婦さんの食事ガイド</title>
+  <meta name="description" content="妊娠中に食べていい食べ物・避けるべき食べ物を簡単チェック！魚・肉・野菜・飲み物など100種類以上をOK/要注意/NGで表示。妊婦さんの食事の不安をすぐ解消。">
+  <meta name="keywords" content="妊娠中 食べ物 OK NG, 妊婦 食事, 妊娠中 食べてはいけない, 妊婦 魚 水銀, 妊婦 カフェイン, 妊娠中 生ハム, 妊婦 食品チェック">
+  <link rel="canonical" href="https://ninpu-shokuhin.vercel.app/">
+  <meta property="og:title" content="妊娠中の食べ物OK/NGチェッカー">
+  <meta property="og:description" content="妊娠中に食べていい食べ物・避けるべき食べ物を簡単チェック！100種類以上をOK/要注意/NGで表示。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ninpu-shokuhin.vercel.app/">
+  <meta property="og:image" content="https://ninpu-shokuhin.vercel.app/ogp.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="妊娠中の食べ物OK/NGチェッカー">
+  <meta name="twitter:description" content="妊娠中に食べていい食べ物・避けるべき食べ物を簡単チェック！">
+  <meta name="twitter:image" content="https://ninpu-shokuhin.vercel.app/ogp.png">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3985655020038392" crossorigin="anonymous"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "妊娠中の食べ物OK/NGチェッカー",
+    "url": "https://ninpu-shokuhin.vercel.app/",
+    "description": "妊娠中に食べていい食べ物・避けるべき食べ物を100種類以上のデータから簡単チェックできるツールです。",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All",
+    "inLanguage": "ja",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "妊娠中に絶対に食べてはいけない食べ物は？", "acceptedAnswer": { "@type": "Answer", "text": "アルコール全般、生ハム・サラミなどの非加熱加工肉、生牡蠣、メカジキ・キンメダイ（水銀が多い魚）、エナジードリンクなどは妊娠中に避けるべき食べ物です。" } },
+      { "@type": "Question", "name": "妊娠中にコーヒーは飲んでいい？", "acceptedAnswer": { "@type": "Answer", "text": "1日1〜2杯程度（カフェイン200〜300mg以下）であれば許容範囲内とされています。ただし飲みすぎは胎児への影響があるため、ノンカフェインのルイボスティーや麦茶への切り替えをおすすめします。" } },
+      { "@type": "Question", "name": "妊娠中にお寿司・お刺身は食べていい？", "acceptedAnswer": { "@type": "Answer", "text": "完全NGではありませんが、リステリア菌やアニサキスのリスクがあるため控えめにするのがおすすめです。特に水銀の多い魚（マグロの大トロ・メカジキ等）は避け、新鮮なものを少量に。" } },
+      { "@type": "Question", "name": "妊娠中に葉酸が多い食べ物は？", "acceptedAnswer": { "@type": "Answer", "text": "ブロッコリー、ほうれん草、小松菜、アボカド、いちご、キウイなどが葉酸を多く含む食材です。食事だけでは必要量を摂りにくいため、葉酸サプリメントも活用しましょう。" } }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --ok: #4caf82;
+      --ok-bg: #e8f8f0;
+      --ok-border: #a8dfc4;
+      --caution: #e8963a;
+      --caution-bg: #fff4e5;
+      --caution-border: #f5c88a;
+      --ng: #e05555;
+      --ng-bg: #fdeaea;
+      --ng-border: #f5aaaa;
+      --purple: #9b7ec8;
+      --pink: #e88fa8;
+      --text: #3a2a3e;
+      --text2: #5a4a5e;
+      --text3: #8a7a8e;
+      --bg: #fdf8ff;
+      --card: #ffffff;
+      --border: rgba(155,126,200,0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+      background: linear-gradient(135deg, #fff5fb 0%, #f8f0ff 50%, #f0f8ff 100%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(135deg, #fce4f0 0%, #f0e4ff 100%);
+      border-bottom: 1px solid rgba(232,143,168,0.2);
+      padding: 32px 20px 28px;
+      text-align: center;
+    }
+    .header-icon { font-size: 48px; display: block; margin-bottom: 12px; }
+    h1 {
+      font-size: clamp(20px, 5vw, 30px);
+      background: linear-gradient(135deg, #c06080, #e88fa8, #9b7ec8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: var(--text3);
+      font-size: 14px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+
+    /* 検索 */
+    .search-wrap {
+      padding: 28px 0 16px;
+    }
+    .search-box {
+      position: relative;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 16px 52px 16px 20px;
+      border: 2px solid rgba(155,126,200,0.3);
+      border-radius: 40px;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(155,126,200,0.15);
+    }
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      pointer-events: none;
+    }
+
+    /* カテゴリタブ */
+    .cats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 16px 0;
+    }
+    .cat-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(155,126,200,0.3);
+      background: white;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text2);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+    .cat-btn:hover { border-color: var(--purple); color: var(--purple); }
+    .cat-btn.active {
+      background: linear-gradient(135deg, #e88fa8, #9b7ec8);
+      border-color: transparent;
+      color: white;
+    }
+
+    /* フィルターバー */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 8px 0 20px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 16px;
+      border: 1.5px solid;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 700;
+    }
+    .filter-btn.all { border-color: rgba(155,126,200,0.4); color: var(--text2); background: white; }
+    .filter-btn.all.active { background: var(--text2); color: white; border-color: transparent; }
+    .filter-btn.ok { border-color: var(--ok-border); color: var(--ok); background: var(--ok-bg); }
+    .filter-btn.ok.active { background: var(--ok); color: white; }
+    .filter-btn.caution { border-color: var(--caution-border); color: var(--caution); background: var(--caution-bg); }
+    .filter-btn.caution.active { background: var(--caution); color: white; }
+    .filter-btn.ng { border-color: var(--ng-border); color: var(--ng); background: var(--ng-bg); }
+    .filter-btn.ng.active { background: var(--ng); color: white; }
+
+    /* 広告 */
+    .ad-area {
+      max-width: 728px;
+      margin: 0 auto 24px;
+      text-align: center;
+      min-height: 90px;
+    }
+
+    /* 結果件数 */
+    .result-count {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: 16px;
+    }
+
+    /* カードグリッド */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      padding-bottom: 32px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 12px rgba(155,126,200,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155,126,200,0.12);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .status-badge {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .status-badge.ok { background: var(--ok-bg); }
+    .status-badge.caution { background: var(--caution-bg); }
+    .status-badge.ng { background: var(--ng-bg); }
+    .card-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+      line-height: 1.3;
+    }
+    .status-label {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .status-label.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-border); }
+    .status-label.caution { background: var(--caution-bg); color: var(--caution); border: 1px solid var(--caution-border); }
+    .status-label.ng { background: var(--ng-bg); color: var(--ng); border: 1px solid var(--ng-border); }
+    .card-reason {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .card-detail {
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.6;
+      display: none;
+      border-top: 1px solid rgba(155,126,200,0.1);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+    .card.open .card-detail { display: block; }
+    .card-more {
+      font-size: 11px;
+      color: var(--purple);
+      margin-top: 6px;
+      display: block;
+    }
+    .card.open .card-more { display: none; }
+
+    /* 空結果 */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text3);
+      display: none;
+    }
+    .empty.show { display: block; }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+
+    /* SEOコンテンツ */
+    .seo-section {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+    }
+    .seo-section h2 {
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(232,143,168,0.2);
+    }
+    .seo-section p, .seo-section li {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.8;
+    }
+    .seo-section ul { padding-left: 20px; }
+    .seo-section li { margin-bottom: 6px; }
+    .faq-item { margin-bottom: 20px; }
+    .faq-q {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 6px;
+    }
+    .faq-q::before { content: "Q. "; }
+    .faq-a { font-size: 14px; color: var(--text2); line-height: 1.7; padding-left: 16px; }
+
+    /* 要注意リスト */
+    .ng-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .ng-item {
+      background: var(--ng-bg);
+      border: 1px solid var(--ng-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--ng);
+      font-weight: 600;
+    }
+    .ng-item::before { content: "❌ "; }
+    .caution-item {
+      background: var(--caution-bg);
+      border: 1px solid var(--caution-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--caution);
+      font-weight: 600;
+    }
+    .caution-item::before { content: "⚠️ "; }
+
+    /* リンクバナー */
+    .link-banner {
+      background: linear-gradient(135deg, #fce4f0, #f0e4ff);
+      border-radius: 16px;
+      padding: 20px 24px;
+      text-align: center;
+      margin: 24px 0;
+      border: 1px solid rgba(232,143,168,0.2);
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .link-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(155,126,200,0.15);
+    }
+    .link-banner-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--purple);
+    }
+    .link-banner-sub {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+    .banner-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    @media (max-width: 560px) { .banner-row { grid-template-columns: 1fr; } }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 13px;
+      color: var(--text3);
+      border-top: 1px solid rgba(155,126,200,0.15);
+      margin-top: 40px;
+    }
+    footer a { color: var(--text3); text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+
+    /* 免責 */
+    .disclaimer {
+      background: rgba(155,126,200,0.06);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.7;
+      margin: 24px 0;
+      border: 1px solid rgba(155,126,200,0.12);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 24px 16px 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .seo-section { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="header-icon">🍽️</span>
+  <h1>妊娠中の食べ物 OK/NG チェッカー</h1>
+  <p class="subtitle">食べ物を検索して、妊婦さんが食べていいか今すぐ確認！</p>
+</header>
+
+<div class="container">
+
+  <!-- 検索 -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="食べ物を検索… 例：マグロ、コーヒー、生ハム" autocomplete="off">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- カテゴリ -->
+  <div class="cats">
+    <button class="cat-btn active" data-cat="all">すべて</button>
+    <button class="cat-btn" data-cat="fish">🐟 魚介類</button>
+    <button class="cat-btn" data-cat="meat">🥩 肉・加工食品</button>
+    <button class="cat-btn" data-cat="dairy">🥚 乳製品・卵</button>
+    <button class="cat-btn" data-cat="veggie">🥦 野菜・果物</button>
+    <button class="cat-btn" data-cat="drink">☕ 飲み物</button>
+    <button class="cat-btn" data-cat="other">🍯 その他</button>
+  </div>
+
+  <!-- ステータスフィルター -->
+  <div class="filter-bar">
+    <button class="filter-btn all active" data-status="all">全表示</button>
+    <button class="filter-btn ok" data-status="ok">✅ 食べてOK</button>
+    <button class="filter-btn caution" data-status="caution">⚠️ 要注意</button>
+    <button class="filter-btn ng" data-status="ng">❌ 避けるべき</button>
+  </div>
+
+  <!-- 広告① -->
+  <div class="ad-area">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3985655020038392"
+         data-ad-slot="9624849394"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 結果件数 -->
+  <p class="result-count" id="resultCount"></p>
+
+  <!-- カードグリッド -->
+  <div class="grid" id="grid"></div>
+
+  <!-- 空結果 -->
+  <div class="empty" id="empty">
+    <div class="empty-icon">🔍</div>
+    <p>「<span id="emptyWord"></span>」は見つかりませんでした。<br>別のキーワードで検索してみてください。</p>
+  </div>
+
+  <!-- 広告② -->
+  <div class="ad-area">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3985655020038392"
+         data-ad-slot="9624849394"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- 関連サイトバナー -->
+  <div class="banner-row">
+    <a class="link-banner" href="https://ninsin-keisan.vercel.app/">
+      <div class="link-banner-text">🍼 妊娠週数・出産予定日を計算</div>
+      <div class="link-banner-sub">最終月経日から週数・出産予定日を自動計算</div>
+    </a>
+    <a class="link-banner" href="https://namae-compass.vercel.app/">
+      <div class="link-banner-text">🌸 赤ちゃんの名前を考える</div>
+      <div class="link-banner-sub">想いや願いから赤ちゃんの名前を提案</div>
+    </a>
+  </div>
+
+  <!-- 免責 -->
+  <div class="disclaimer">
+    ⚠️ このサイトの情報はあくまで参考情報です。実際の食事や体調に関することは、担当の産婦人科医・助産師にご相談ください。個人の体質・体調・妊娠経過によって適切な食事は異なります。
+  </div>
+
+  <!-- SEOコンテンツ -->
+  <div class="seo-section">
+    <h2>妊娠中に絶対避けるべき食べ物</h2>
+    <div class="ng-list">
+      <div class="ng-item">アルコール全般</div>
+      <div class="ng-item">生ハム・サラミ</div>
+      <div class="ng-item">メカジキ・キンメダイ</div>
+      <div class="ng-item">生牡蠣</div>
+      <div class="ng-item">エナジードリンク</div>
+      <div class="ng-item">カマンベールチーズ（生）</div>
+      <div class="ng-item">ユッケ・レアステーキ</div>
+      <div class="ng-item">スモークサーモン</div>
+    </div>
+  </div>
+
+  <div class="seo-section">
+    <h2>妊娠中の食事で気をつけること</h2>
+    <ul>
+      <li><strong>アルコール</strong>：胎盤を通過し、胎児の発育に影響します。「少量なら大丈夫」という根拠はなく、妊娠中は完全禁酒が原則です。</li>
+      <li><strong>水銀を含む魚</strong>：メカジキ・キンメダイ・本まぐろなどは水銀が多く、食べる量・頻度に上限が設けられています。サバ・アジ・イワシなどの小型魚は安心して食べられます。</li>
+      <li><strong>リステリア菌</strong>：生ハム・非加熱ナチュラルチーズ・スモークサーモンなどに潜むリステリア菌は妊婦に重大なリスク。必ず加熱したものを食べましょう。</li>
+      <li><strong>カフェイン</strong>：コーヒー・紅茶・緑茶に含まれるカフェインは1日200〜300mg以下に。ルイボスティーや麦茶への切り替えがおすすめです。</li>
+      <li><strong>ビタミンA過剰</strong>：うなぎ・レバーにはビタミンAが多く、過剰摂取で胎児に影響することが。食べるなら月1〜2回程度に。</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>妊娠中に積極的に食べたいもの</h2>
+    <p>以下の食材は妊娠中に特に大切な葉酸・鉄分・カルシウム・DHAが豊富です：</p>
+    <ul style="margin-top:12px">
+      <li><strong>葉酸</strong>：ブロッコリー・ほうれん草・小松菜・アボカド・キウイ・いちご</li>
+      <li><strong>鉄分</strong>：ほうれん草・小松菜・納豆・カツオ・レバー（少量）</li>
+      <li><strong>カルシウム</strong>：牛乳・ヨーグルト・プロセスチーズ・小松菜・ちりめんじゃこ</li>
+      <li><strong>DHA</strong>：サバ・アジ・イワシ・サーモン（加熱）・カツオ</li>
+    </ul>
+  </div>
+
+  <div class="seo-section">
+    <h2>よくある質問</h2>
+    <div class="faq-item">
+      <div class="faq-q">妊娠中にコーヒーは飲んでいい？</div>
+      <div class="faq-a">1日1〜2杯（カフェイン200〜300mg以下）なら許容範囲とされています。ただし過剰摂取は胎児の発育に影響するため、ノンカフェインのルイボスティーや麦茶に切り替えることをおすすめします。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">お寿司・お刺身は食べていい？</div>
+      <div class="faq-a">完全NGではありませんが、リステリア菌やアニサキスのリスクがあるため控えめにするのが安心です。水銀の多い魚（本まぐろ・メカジキ等）は避け、新鮮なものを少量に。回転寿司など大量には食べないようにしましょう。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">生ハムはなぜNG？</div>
+      <div class="faq-a">リステリア菌・トキソプラズマのリスクがあるためです。妊婦がリステリア症にかかると、流産・早産・死産のリスクが上がります。加熱したハムやウインナーは問題なく食べられます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">はちみつは妊婦に危険？</div>
+      <div class="faq-a">妊婦さん自身がはちみつを食べることは全く問題ありません。「はちみつNG」は1歳未満の赤ちゃんに対するルールです。妊娠中のお母さんは安心して食べてください。</div>
+    </div>
+  </div>
+
+  <!-- 広告③ -->
+  <div class="ad-area">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3985655020038392"
+         data-ad-slot="9624849394"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 妊娠中の食べ物OK/NGチェッカー ／ 掲載情報は参考情報です。医療的な判断は医師にご相談ください。<br><br>
+  <a href="https://ninsin-keisan.vercel.app/" style="color:var(--pink);font-size:13px;font-weight:700">🍼 妊娠週数・出産予定日の計算はこちら</a>
+  　／
+  <a href="https://namae-compass.vercel.app/" style="color:var(--pink);font-size:13px;font-weight:700">🌸 赤ちゃんの名前を考えるならこちら</a>
+  <br><br>
+  <a href="./privacy.html">プライバシーポリシー</a>
+  　／
+  <a href="./contact.html">お問い合わせ</a>
+</footer>
+
+<script>
+const foods = [
+  // 魚介類
+  { name: "マグロ（本まぐろ・めばちまぐろ）", kana: "まぐろ", category: "fish", status: "caution", reason: "水銀が多め。週1回・80g以下に。", detail: "本まぐろ・めばちまぐろは水銀量が多いため量・頻度に注意。びんながまぐろ（ツナ缶）は比較的少なめ。" },
+  { name: "メカジキ", kana: "めかじき", category: "fish", status: "ng", reason: "水銀含有量が非常に多く、妊婦は避けるべき魚。", detail: "厚生労働省が妊婦への摂取制限を推奨している魚のひとつ。できれば完全に避けて。" },
+  { name: "キンメダイ", kana: "きんめだい", category: "fish", status: "ng", reason: "水銀含有量が非常に多く、妊婦は避けるべき魚。", detail: "週80g以下の制限対象魚。できれば避けたほうが安心。" },
+  { name: "マグロ（びんながまぐろ）", kana: "びんちょうまぐろ びんながまぐろ", category: "fish", status: "caution", reason: "本まぐろより水銀少なめだが食べすぎ注意。週2缶程度まで。", detail: "ツナ缶に多く使われる種類。週2缶（160g）を目安に。" },
+  { name: "サーモン（生・お刺身）", kana: "さーもん なま さしみ", category: "fish", status: "caution", reason: "生食はリステリア菌・アニサキスのリスクあり。加熱がおすすめ。", detail: "お刺身・寿司での生食は控えめに。火を通すと安心して食べられる。" },
+  { name: "サーモン（加熱）", kana: "さーもん かねつ やきざかな", category: "fish", status: "ok", reason: "加熱済みなら安心。DHAも豊富で積極的に食べたい。", detail: "ムニエルや焼き鮭などは問題なし。EPAやDHAも豊富で妊娠中に◎。" },
+  { name: "サバ", kana: "さば", category: "fish", status: "ok", reason: "水銀が少なく、DHAも豊富。加熱して食べましょう。", detail: "焼き魚・煮魚として積極的に摂りたい魚。生食は避けて。" },
+  { name: "アジ", kana: "あじ", category: "fish", status: "ok", reason: "水銀が少なく妊娠中でも安心。", detail: "焼き魚や干物など加熱して食べるのがおすすめ。" },
+  { name: "イワシ", kana: "いわし", category: "fish", status: "ok", reason: "水銀が少なくDHA豊富。積極的に食べたい魚。", detail: "缶詰でも栄養豊富。加熱して食べましょう。" },
+  { name: "タラ", kana: "たら", category: "fish", status: "ok", reason: "低脂肪・低カロリーで妊娠中に安心な白身魚。", detail: "水銀含有量が少なく安心。鍋やホイル焼きに。" },
+  { name: "カツオ", kana: "かつお", category: "fish", status: "ok", reason: "水銀少なめで鉄分も豊富。加熱がおすすめ。", detail: "たたきなど生食もあるが、できれば加熱を。鉄分補給にも優秀。" },
+  { name: "お刺身・お寿司（生魚）", kana: "おさしみ おすし なまざかな", category: "fish", status: "caution", reason: "リステリア菌・アニサキスのリスクあり。完全NGではないが控えめに。", detail: "食べたい場合は新鮮なものを少量に。水銀の多い魚（まぐろ大量・メカジキ等）は避けて。" },
+  { name: "ツナ缶（シーチキン）", kana: "つなかん しーちきん ツナ", category: "fish", status: "caution", reason: "水銀がやや含まれる。週2缶（160g）程度まで。", detail: "びんながまぐろ使用が多く比較的安全だが、食べすぎ注意。" },
+  { name: "うなぎ", kana: "うなぎ", category: "fish", status: "caution", reason: "ビタミンAが豊富すぎるため食べすぎ注意。月1〜2回程度に。", detail: "たまに少量なら問題なし。レバーと同じ日に食べるのは避けて。" },
+  { name: "カキ（生牡蠣）", kana: "かき なまがき", category: "fish", status: "ng", reason: "ノロウイルス・食中毒リスクが高く妊婦は避けるべき。", detail: "必ず加熱調理のものを。生牡蠣は妊娠中は避けて。" },
+  { name: "カキ（加熱）", kana: "かき かねつ かきふらい やきがき", category: "fish", status: "ok", reason: "十分に加熱すれば安心して食べられます。", detail: "牡蠣フライや焼き牡蠣など加熱したものはOK。亜鉛・鉄分も豊富。" },
+  { name: "エビ・イカ・タコ（加熱）", kana: "えび いか たこ かねつ", category: "fish", status: "ok", reason: "加熱済みなら問題なし。", detail: "生食は避け、しっかり火を通して食べましょう。" },
+  { name: "スモークサーモン", kana: "すもーくさーもん", category: "fish", status: "ng", reason: "加熱不十分でリステリア菌リスクあり。", detail: "燻製は加熱が不完全なため妊婦は避けるのが無難。加熱した鮭はOK。" },
+  { name: "ちりめんじゃこ", kana: "ちりめんじゃこ じゃこ", category: "fish", status: "caution", reason: "水銀が微量含まれる。食べすぎ注意。", detail: "少量なら問題なし。カルシウム豊富でおすすめ食材。" },
+  { name: "サンマ", kana: "さんま", category: "fish", status: "ok", reason: "水銀が少なく、DHA・EPAが豊富な優秀な魚。", detail: "塩焼きや煮付けで積極的に食べたい。加熱して食べましょう。" },
+  // 肉・加工食品
+  { name: "生ハム", kana: "なまはむ", category: "meat", status: "ng", reason: "加熱不十分でリステリア菌・トキソプラズマのリスクあり。", detail: "妊娠中は生ハムを避けてください。加熱したハムならOK。" },
+  { name: "サラミ・ペパロニ", kana: "さらみ ぺぱろに", category: "meat", status: "ng", reason: "非加熱の加工肉はリステリア菌リスクあり。", detail: "加熱した肉類と異なり、生のまま食べる加工肉は注意が必要。" },
+  { name: "ウインナー・ソーセージ（加熱）", kana: "うぃんなー そーせーじ かねつ", category: "meat", status: "ok", reason: "しっかり加熱すれば安心して食べられます。", detail: "焼いたりレンジ加熱したものはOK。塩分の摂りすぎに注意。" },
+  { name: "ハム（加熱）", kana: "はむ かねつ", category: "meat", status: "ok", reason: "加熱済みのハムなら問題なし。", detail: "炒め物や加熱料理に使うのがおすすめ。" },
+  { name: "鶏肉（加熱）", kana: "とりにく かねつ とりむね ももにく", category: "meat", status: "ok", reason: "十分加熱すれば問題なし。高タンパク低脂質。", detail: "カンピロバクター予防のため中までしっかり火を通して。" },
+  { name: "豚肉（加熱）", kana: "ぶたにく かねつ ぶた", category: "meat", status: "ok", reason: "十分加熱すれば問題なし。", detail: "トキソプラズマ予防のためしっかり加熱を。生や半生はNG。" },
+  { name: "牛肉（加熱）", kana: "ぎゅうにく かねつ ぎゅう", category: "meat", status: "ok", reason: "十分加熱すれば問題なし。", detail: "レアやミディアムレアは避け、しっかり火を通して。" },
+  { name: "レバー（鶏・豚・牛）", kana: "ればー きも", category: "meat", status: "caution", reason: "ビタミンAが非常に多く、過剰摂取で胎児への影響も。月1〜2回少量に。", detail: "鉄分豊富なので少量は有益だが、食べすぎ注意。うなぎと同じ日は避けて。" },
+  { name: "ユッケ・レアステーキ", kana: "ゆっけ れあすてーき", category: "meat", status: "ng", reason: "生・半生の牛肉は食中毒・トキソプラズマリスクあり。", detail: "妊娠中は生肉を避け、必ず中まで加熱して食べてください。" },
+  { name: "ローストビーフ", kana: "ろーすとびーふ", category: "meat", status: "caution", reason: "中心部が生に近い場合があるため注意。", detail: "家庭でしっかり加熱したものはOK。外食・市販品は加熱が不完全な場合も。" },
+  { name: "焼き肉（レア）", kana: "やきにく れあ", category: "meat", status: "ng", reason: "半生の肉は食中毒・トキソプラズマリスクあり。必ず中まで焼いて。", detail: "焼き肉は楽しんでOK。ただし必ずウェルダンで食べましょう。" },
+  // 乳製品・卵
+  { name: "牛乳", kana: "ぎゅうにゅう ミルク", category: "dairy", status: "ok", reason: "カルシウム豊富で妊娠中に積極的に摂りたい。", detail: "1日コップ1〜2杯が目安。カルシウム補給に最適。" },
+  { name: "ヨーグルト", kana: "よーぐると", category: "dairy", status: "ok", reason: "カルシウム・乳酸菌豊富でおすすめ。", detail: "腸内環境を整える効果も。甘みが強いものは食べすぎ注意。" },
+  { name: "プロセスチーズ", kana: "ぷろせすちーず すらいすちーず べびーちーず チーズ", category: "dairy", status: "ok", reason: "加熱処理済みで安心して食べられます。", detail: "スライスチーズやベビーチーズはOK。カルシウム源として活用を。" },
+  { name: "カマンベール・ブリー（非加熱）", kana: "かまんべーる ぶりー なまちーず ナチュラルチーズ", category: "dairy", status: "ng", reason: "非加熱ナチュラルチーズはリステリア菌リスクあり。", detail: "ピザや料理で十分に溶けるまで加熱したものはOK。生食は避けて。" },
+  { name: "モッツァレラ（非加熱）", kana: "もっつぁれら なまちーず", category: "dairy", status: "caution", reason: "非加熱ナチュラルチーズはリステリア菌リスクあり。加熱してから食べて。", detail: "ピザ等で完全に溶けるまで加熱すればOK。生食は控えめに。" },
+  { name: "卵（加熱）", kana: "たまご かねつ ゆでたまご めだまやき", category: "dairy", status: "ok", reason: "タンパク質・鉄分豊富。完全加熱でOK。", detail: "目玉焼き・ゆで卵など中まで火を通して食べましょう。" },
+  { name: "卵（半熟・生卵）", kana: "たまご はんじゅく なまたまご たまごかけごはん", category: "dairy", status: "caution", reason: "サルモネラ菌リスクあり。できれば完全加熱を。", detail: "市販の生食用卵なら半熟も許容範囲。外食の半熟卵・たまごかけご飯は注意。" },
+  { name: "アイスクリーム", kana: "あいすくりーむ あいす", category: "dairy", status: "ok", reason: "適量であれば問題なし。食べすぎ注意。", detail: "糖分・カロリーの摂りすぎに注意。たまのご褒美に！" },
+  { name: "豆乳", kana: "とうにゅう", category: "dairy", status: "ok", reason: "植物性タンパク質・イソフラボン豊富でおすすめ。", detail: "牛乳が苦手な方の代替にも。無調整タイプがおすすめ。" },
+  // 野菜・果物
+  { name: "ほうれん草", kana: "ほうれんそう", category: "veggie", status: "ok", reason: "葉酸・鉄分が豊富で妊娠中に積極的に食べたい野菜。", detail: "炒め物や和え物に。葉酸は初期の神経管閉鎖障害予防に重要。" },
+  { name: "小松菜", kana: "こまつな", category: "veggie", status: "ok", reason: "カルシウム・鉄分・葉酸が豊富。", detail: "ほうれん草より食べやすく栄養豊富。積極的に摂りたい。" },
+  { name: "ブロッコリー", kana: "ぶろっこりー", category: "veggie", status: "ok", reason: "葉酸・ビタミンC豊富で妊娠中におすすめ。", detail: "加熱しても葉酸が比較的残りやすい。サラダや炒め物に。" },
+  { name: "アボカド", kana: "あぼかど", category: "veggie", status: "ok", reason: "葉酸・カリウム豊富で妊娠中に◎", detail: "食べすぎはカロリー過多になるが、適量はとても優秀な食材。" },
+  { name: "にんじん", kana: "にんじん", category: "veggie", status: "ok", reason: "β-カロテン豊富。野菜由来なので過剰にならず安心。", detail: "煮物やスープに。ビタミンA過剰の心配がある動物性とは異なる。" },
+  { name: "さつまいも", kana: "さつまいも", category: "veggie", status: "ok", reason: "葉酸・食物繊維豊富で便秘改善にも。", detail: "妊娠中の便秘対策としてもおすすめ。" },
+  { name: "かぼちゃ", kana: "かぼちゃ", category: "veggie", status: "ok", reason: "葉酸・ビタミンE豊富でおすすめ。", detail: "甘みがあり食べやすい。煮物やスープに。" },
+  { name: "バナナ", kana: "ばなな", category: "veggie", status: "ok", reason: "手軽で栄養豊富。ビタミンB6・カリウム豊富。", detail: "つわり中でも食べやすい。食べすぎは糖分過多に注意。" },
+  { name: "キウイ", kana: "きうい", category: "veggie", status: "ok", reason: "葉酸・ビタミンC豊富で妊娠中に最適な果物。", detail: "葉酸の含有量が果物の中でもトップクラス。積極的に食べたい。" },
+  { name: "いちご", kana: "いちご", category: "veggie", status: "ok", reason: "葉酸・ビタミンC豊富で妊娠中におすすめ。", detail: "よく洗って食べましょう。甘みもあり食べやすい。" },
+  { name: "みかん・オレンジ", kana: "みかん おれんじ", category: "veggie", status: "ok", reason: "ビタミンC・葉酸豊富で安心して食べられる。", detail: "食べすぎには注意が必要だが、適量ならおすすめ。" },
+  { name: "スイカ", kana: "すいか", category: "veggie", status: "ok", reason: "水分・カリウム豊富で夏場の水分補給にも。", detail: "むくみ改善効果も。適量なら積極的に食べたい。" },
+  { name: "パイナップル", kana: "ぱいなっぷる", category: "veggie", status: "ok", reason: "食事量では問題なし。食べすぎ注意。", detail: "「子宮収縮を引き起こす」という俗説は食事量では問題なし。" },
+  { name: "アロエ（食品・サプリ）", kana: "あろえ", category: "veggie", status: "caution", reason: "大量摂取で子宮収縮の可能性。食品程度は許容範囲。", detail: "市販のアロエヨーグルト程度なら問題なし。サプリや濃縮品は避けて。" },
+  { name: "よもぎ", kana: "よもぎ", category: "veggie", status: "caution", reason: "大量摂取で子宮収縮作用の可能性。食事量はOK。", detail: "よもぎ餅など食事量での摂取は問題なし。サプリは避けて。" },
+  { name: "生姜", kana: "しょうが", category: "veggie", status: "ok", reason: "少量なら問題なし。つわりにも効果的。", detail: "生姜湯やショウガ入り料理はOK。大量摂取（サプリ等）は注意。" },
+  { name: "にんにく", kana: "にんにく", category: "veggie", status: "ok", reason: "料理に使う程度なら問題なし。", detail: "大量摂取は消化器への刺激に注意。薬味・調理用はOK。" },
+  { name: "ぶどう・マスカット", kana: "ぶどう ますかっと", category: "veggie", status: "ok", reason: "鉄分・ポリフェノール含む。適量なら問題なし。", detail: "糖分が高めなので食べすぎ注意。適量は◎。" },
+  // 飲み物
+  { name: "コーヒー", kana: "こーひー", category: "drink", status: "caution", reason: "カフェインは胎盤を通過。1日1〜2杯（200〜300mg以下）まで。", detail: "WHO推奨は1日300mg以下。コーヒー1杯約80〜100mg。妊娠初期は特に控えめに。" },
+  { name: "紅茶", kana: "こうちゃ", category: "drink", status: "caution", reason: "カフェインが含まれる。1日2〜3杯程度まで。", detail: "紅茶1杯のカフェインはコーヒーより少なめ。適量なら問題なし。" },
+  { name: "緑茶・抹茶", kana: "りょくちゃ まっちゃ おちゃ", category: "drink", status: "caution", reason: "カフェインが含まれる。水代わりに飲み過ぎないように。", detail: "緑茶1杯約30〜40mg。抹茶は濃度が高めなので特に注意。" },
+  { name: "ほうじ茶", kana: "ほうじちゃ", category: "drink", status: "ok", reason: "カフェインが少なく妊娠中でも飲みやすい。", detail: "緑茶より焙煎でカフェイン少なめ。妊娠中の代替茶としておすすめ。" },
+  { name: "ルイボスティー", kana: "るいぼすてぃー るいぼす", category: "drink", status: "ok", reason: "ノンカフェインで妊娠中に安心して飲める。", detail: "ミネラル豊富。鉄分吸収を妨げないため食事中もOK。妊婦さんにおすすめ。" },
+  { name: "麦茶", kana: "むぎちゃ", category: "drink", status: "ok", reason: "ノンカフェインで妊娠中に安心。", detail: "水分補給に最適。ミネラルも含まれている。" },
+  { name: "カモミールティー", kana: "かもみーるてぃー", category: "drink", status: "caution", reason: "大量摂取で子宮収縮・流産リスクの可能性。1日1杯程度に。", detail: "少量なら許容範囲とされているが、妊娠初期は特に控えめに。" },
+  { name: "ハーブティー", kana: "はーぶてぃー", category: "drink", status: "caution", reason: "種類によっては子宮への影響あり。成分を確認して。", detail: "ルイボス・ジンジャーは比較的安全。セージ・ローズマリーの大量摂取は注意。" },
+  { name: "アルコール（ビール・ワイン・日本酒等）", kana: "あるこーる びーる わいん にほんしゅ おさけ", category: "drink", status: "ng", reason: "胎盤を通過し胎児に悪影響。妊娠中は完全禁止。", detail: "「少量なら大丈夫」という根拠はなし。妊娠がわかったら直ちに禁酒を。" },
+  { name: "ノンアルコール飲料", kana: "のんあるこーる", category: "drink", status: "caution", reason: "微量のアルコールが含まれる場合あり。", detail: "「アルコール度数0.00%」表記のものは安心。「0.5%未満」は微量含む可能性あり。" },
+  { name: "エナジードリンク", kana: "えなじーどりんく レッドブル モンスター", category: "drink", status: "ng", reason: "カフェインが非常に多く含まれる。妊娠中は避けて。", detail: "1缶でカフェイン150〜300mgを超えるものも。妊娠中は絶対に避けてください。" },
+  { name: "水・ミネラルウォーター", kana: "みず みねらるうぉーたー", category: "drink", status: "ok", reason: "1日1.5〜2リットルを目標に積極的に飲みましょう。", detail: "硬水は便秘改善に◎。軟水の方が日本人には飲みやすい。どちらでもOK。" },
+  { name: "スポーツドリンク", kana: "すぽーつどりんく ポカリ アクエリアス", category: "drink", status: "ok", reason: "適量なら問題なし。糖分の飲み過ぎに注意。", detail: "脱水症状の予防に。糖分が高めなので水と交互に飲むのがおすすめ。" },
+  { name: "炭酸水", kana: "たんさんすい", category: "drink", status: "ok", reason: "ノンカフェインで問題なし。つわり中にも飲みやすい。", detail: "糖分・カロリーなしのものを選んで。つわり中の気分転換にも。" },
+  // その他
+  { name: "はちみつ", kana: "はちみつ", category: "other", status: "ok", reason: "妊婦さん自身には安全。乳児への与えはNG（1歳未満）。", detail: "妊婦さんが食べることは全く問題なし。授乳中も食べること自体はOK。" },
+  { name: "チョコレート", kana: "ちょこれーと", category: "other", status: "caution", reason: "カフェインが含まれる。食べすぎ注意。", detail: "板チョコ1〜2枚程度なら許容範囲内。高カカオチョコはカフェイン多めなので注意。" },
+  { name: "納豆", kana: "なっとう", category: "other", status: "ok", reason: "葉酸・ビタミンK・タンパク質豊富で妊娠中に◎", detail: "妊娠中に積極的に食べたい食材。血液凝固に必要なビタミンKも含有。" },
+  { name: "豆腐・大豆製品", kana: "とうふ だいずせいひん みそしる えだまめ", category: "other", status: "ok", reason: "植物性タンパク質・葉酸豊富でおすすめ。", detail: "豆腐・豆乳・枝豆など大豆製品は積極的に食べたい。" },
+  { name: "梅干し", kana: "うめぼし", category: "other", status: "ok", reason: "つわり中に食べやすい。適量なら問題なし。", detail: "塩分が多いため食べすぎは高血圧の原因に。1日1〜2個が目安。" },
+  { name: "キムチ", kana: "きむち", category: "other", status: "caution", reason: "少量なら発酵食品として◎。唐辛子・塩分の過剰摂取に注意。", detail: "少量なら腸内環境に良い。食べすぎは塩分・刺激物過多になるので注意。" },
+  { name: "わさび", kana: "わさび", category: "other", status: "ok", reason: "薬味程度（少量）なら問題なし。", detail: "刺激物なので大量摂取は避けて。寿司・そばの薬味程度はOK。" },
+  { name: "からし", kana: "からし", category: "other", status: "caution", reason: "少量なら問題なし。大量摂取は子宮への刺激になる可能性。", detail: "料理に少し使う程度はOK。大量に食べることは避けて。" },
+  { name: "葉酸サプリメント", kana: "さぷりめんと ようさん", category: "other", status: "ok", reason: "妊娠初期から積極的に摂りたいサプリ。", detail: "厚生労働省も推奨。食事だけでは摂りにくい葉酸をサプリで補いましょう。" },
+  { name: "漢方薬・薬膳", kana: "かんぽう やくぜん", category: "other", status: "caution", reason: "種類によって妊娠中に禁忌のものあり。産婦人科医に相談を。", detail: "「天然だから安全」は誤解。漢方薬は必ず医師に相談してから。" },
+  { name: "黒糖", kana: "こくとう", category: "other", status: "ok", reason: "ミネラル豊富で問題なし。食べすぎ注意。", detail: "カリウム・カルシウム・鉄分含む。甘みが強いのでカロリー注意。" },
+  { name: "昆布・のり・わかめ", kana: "こんぶ のり わかめ かいそう", category: "other", status: "ok", reason: "ミネラル・ヨウ素豊富でおすすめ。食べすぎ注意。", detail: "ヨウ素は甲状腺機能に必要。ただし過剰摂取は甲状腺に影響することも。適量に。" },
+  { name: "ピーナッツ・ナッツ類", kana: "ぴーなっつ なっつ くるみ", category: "other", status: "ok", reason: "葉酸・ビタミンE・不飽和脂肪酸豊富でおすすめ。", detail: "くるみはDHAも含む。食べすぎはカロリー過多なので1日ひとつかみ程度に。" },
+];
+
+let currentCat = 'all';
+let currentStatus = 'all';
+let searchTerm = '';
+
+function statusIcon(s) {
+  return s === 'ok' ? '✅' : s === 'caution' ? '⚠️' : '❌';
+}
+function statusText(s) {
+  return s === 'ok' ? '食べてOK' : s === 'caution' ? '要注意' : '避けるべき';
+}
+
+function render() {
+  const q = searchTerm.trim().toLowerCase();
+  const filtered = foods.filter(f => {
+    const matchCat = currentCat === 'all' || f.category === currentCat;
+    const matchStatus = currentStatus === 'all' || f.status === currentStatus;
+    const matchSearch = !q || f.name.toLowerCase().includes(q) || f.kana.includes(q) || f.name.includes(searchTerm);
+    return matchCat && matchStatus && matchSearch;
+  });
+
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const count = document.getElementById('resultCount');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.add('show');
+    document.getElementById('emptyWord').textContent = searchTerm;
+    count.textContent = '';
+  } else {
+    empty.classList.remove('show');
+    count.textContent = `${filtered.length}件表示中`;
+    grid.innerHTML = filtered.map((f, i) => `
+      <div class="card" onclick="this.classList.toggle('open')">
+        <div class="card-header">
+          <div class="status-badge ${f.status}">${statusIcon(f.status)}</div>
+          <div class="card-name">${f.name}</div>
+          <div class="status-label ${f.status}">${statusText(f.status)}</div>
+        </div>
+        <div class="card-reason">${f.reason}</div>
+        <span class="card-more">▼ 詳しく見る</span>
+        <div class="card-detail">${f.detail}</div>
+      </div>
+    `).join('');
+  }
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  render();
+});
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    render();
+  });
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentStatus = btn.dataset.status;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
