@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://ninpu-shokuhin.vercel.app/sitemap.xml
+Sitemap: https://ninpu-shokuhin-check.vercel.app/sitemap.xml
